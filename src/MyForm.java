@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class MyForm {
@@ -13,14 +11,11 @@ public class MyForm {
 
     public MyForm() {
         cbSmooth.addActionListener(e -> clock.setSmoothSecPointer(cbSmooth.isSelected()));
-        comboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String s = (String)comboBox.getSelectedItem();
-                for (ImageSet is : al) {
-                    if (is.name.equals(s)) {
-                        clock.newImageSet(is);
-                    }
+        comboBox.addActionListener(e -> {
+            String s = (String)comboBox.getSelectedItem();
+            for (ImageSet is : al) {
+                if (is.name.equals(s)) {
+                    clock.newImageSet(is);
                 }
             }
         });
