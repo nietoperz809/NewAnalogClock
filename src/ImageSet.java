@@ -30,4 +30,9 @@ public class ImageSet {
         }
         return new BufferedInputStream(is);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
