@@ -43,6 +43,7 @@ class Clock extends JPanel {
         }
         int min = cal.get(Calendar.MINUTE);
         int hr = cal.get(Calendar.HOUR); // 0 ... 23
+        int temp = hr * 60 + min;
 
         // Face
         offgraph.drawImage (imageSet.clockFace, 0, 0, null);
@@ -50,15 +51,15 @@ class Clock extends JPanel {
         Image i1 = rotateImage(imageSet.imgSecond, sec*6f);
         offgraph.drawImage(i1, 0, 0, null);
         // Min
-        Image i2 = rotateImage(imageSet.imgMinute,min*6f);
+        Image i2 = rotateImage(imageSet.imgMinute,temp*6f);
         offgraph.drawImage(i2, 0, 0, null);
         // Hour
-        Image i3 = rotateImage(imageSet.imgHour,hr*30f);
+        Image i3 = rotateImage(imageSet.imgHour,temp/2f);
         offgraph.drawImage(i3, 0, 0, null);
         repaint();
     }
 
-    public static BufferedImage rotateImage (BufferedImage bimg, double angle) {
+    public static BufferedImage rotateImage (BufferedImage bimg, float angle) {
         int w = bimg.getWidth();
         int h = bimg.getHeight();
 
