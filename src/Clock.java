@@ -42,7 +42,7 @@ class Clock extends JPanel {
             sec += mill;
         }
         int min = cal.get(Calendar.MINUTE);
-        int hr = cal.get(Calendar.HOUR_OF_DAY); // 0 ... 23
+        int hr = cal.get(Calendar.HOUR); // 0 ... 23
 
         // Face
         offgraph.drawImage (imageSet.clockFace, 0, 0, null);
