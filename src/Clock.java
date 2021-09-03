@@ -46,10 +46,13 @@ class Clock extends JPanel {
         int temp = hr * 60 + min;
 
         // Face
+        offgraph.clearRect(0,0, offimg.getWidth(), offimg.getHeight());
         offgraph.drawImage (imageSet.clockFace, 0, 0, null);
         // Sec
-        Image i1 = rotateImage(imageSet.imgSecond, sec*6f);
-        offgraph.drawImage(i1, 0, 0, null);
+        if (imageSet.imgSecond != null) {
+            Image i1 = rotateImage(imageSet.imgSecond, sec * 6f);
+            offgraph.drawImage(i1, 0, 0, null);
+        }
         // Min
         Image i2 = rotateImage(imageSet.imgMinute,temp*6f);
         offgraph.drawImage(i2, 0, 0, null);

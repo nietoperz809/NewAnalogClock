@@ -19,6 +19,14 @@ public class ImageSet {
         imgSecond = ImageIO.read (Objects.requireNonNull (getResource (second)));
     }
 
+    public ImageSet (String name, String face, String hour, String minute) throws Exception {
+        this.name = name;
+        clockFace = ImageIO.read (Objects.requireNonNull (getResource (face)));
+        imgHour = ImageIO.read (Objects.requireNonNull (getResource (hour)));
+        imgMinute = ImageIO.read (Objects.requireNonNull (getResource (minute)));
+        imgSecond = null;
+    }
+
     public static InputStream getResource (String name)
     {
         InputStream is = ClassLoader.getSystemResourceAsStream (name);

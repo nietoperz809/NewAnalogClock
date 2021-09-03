@@ -20,6 +20,10 @@ public class MyForm {
                 "bell_minute.png", "bell_second.png"));
         combMod.addElement (new ImageSet ("Day", "day_dial.png", "day_hour.png",
                 "day_minute.png", "day_second.png"));
+        combMod.addElement (new ImageSet ("Bg", "bg_clock_bg.png", "ic_hour.png",
+                "ic_minute.png", "ic_miao.png"));
+        combMod.addElement (new ImageSet ("Honey", "honeycomb_clock_dial.png", "honeycomb_clock_hour.png",
+                "honeycomb_clock_minute.png", "honeycomb_clock_sec.png"));
 
         comboBox.setModel (combMod);
 
