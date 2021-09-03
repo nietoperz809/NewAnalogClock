@@ -88,3 +88,4 @@ class Clock extends JPanel {
         return new Dimension(offimg.getWidth(), offimg.getHeight());
     }
 }
+
