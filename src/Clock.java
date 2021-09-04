@@ -11,7 +11,7 @@ class Clock extends JPanel {
     private boolean smooth;
 
     private BufferedImage offimg;
-    private Graphics offgraph;
+    private Graphics2D offgraph;
     private ImageSet imageSet;
 
     public Clock (ImageSet imgSet) {
@@ -25,7 +25,7 @@ class Clock extends JPanel {
         imageSet = imgSet;
         offimg = new BufferedImage (imgSet.clockFace.getWidth(),
                 imgSet.clockFace.getHeight(),
-                BufferedImage.TYPE_INT_RGB);
+                BufferedImage.TYPE_INT_ARGB);
         offgraph = offimg.createGraphics();
     }
 
@@ -48,6 +48,11 @@ class Clock extends JPanel {
         // Face
         offgraph.clearRect(0,0, offimg.getWidth(), offimg.getHeight());
         offgraph.drawImage (imageSet.clockFace, 0, 0, null);
+
+//        float alpha = 1.0f; //draw half transparent
+//        AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.CLEAR,alpha);
+//        offgraph.setComposite(ac);
+
         // Sec
         if (imageSet.imgSecond != null) {
             Image i1 = rotateImage(imageSet.imgSecond, sec * 6f);
