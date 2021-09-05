@@ -9,7 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 class Clock extends JPanel {
     private boolean smooth;
-
+    private String tick;
+    private int counter;
     private BufferedImage offimg;
     private Graphics2D offgraph;
     private ImageSet imageSet;
@@ -40,6 +41,13 @@ class Clock extends JPanel {
         if (smooth) {
             float mill = cal.get(Calendar.MILLISECOND) / 1000f;
             sec += mill;
+        }
+        if (tick != null) {
+            counter++;
+            if (counter == 10) {
+                counter = 0;
+                WavePlayer.playFileFromResource(tick);
+            }
         }
         int min = cal.get(Calendar.MINUTE);
         int hr = cal.get(Calendar.HOUR); // 0 ... 23
@@ -91,6 +99,13 @@ class Clock extends JPanel {
 
     public Dimension getPreferredSize() {
         return new Dimension(offimg.getWidth(), offimg.getHeight());
+    }
+
+    public void setTick (String s) {
+        if (s == null)
+            tick = null;
+        else
+            tick = s;
     }
 }
 

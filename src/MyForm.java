@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedInputStream;
 import java.util.Objects;
 
 public class MyForm {
@@ -8,6 +9,7 @@ public class MyForm {
     public MyForm() throws Exception{
         DefaultComboBoxModel<ImageSet> combMod = new DefaultComboBoxModel<>();
         JCheckBox cbSmooth = new JCheckBox("Smooth SecPointer");
+        JCheckBox cbTick = new JCheckBox("Tick Sound");
         JComboBox<ImageSet> comboBox = new JComboBox<>();
 
         combMod.addElement (new ImageSet ("Dial", "ics_clock_dial2.png", "ics_clock_hour.png",
@@ -32,16 +34,22 @@ public class MyForm {
                 "roman1_minute_hand.png", "roman1_sec_hand.png"));
         combMod.addElement (new ImageSet ("Stock1", "stockg1_dial.png", "stockg1_hour.png",
                 "stockg1_minute.png", "stockg1_sec.png"));
+        combMod.addElement (new ImageSet ("Red", "red1_bg.png", "red1_hour_hand.png",
+                "red1_minute_hand.png", "red1_sec_hand.png"));
 
         comboBox.setModel (combMod);
 
         Clock clock = new Clock (combMod.getElementAt(0));
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add (clock, BorderLayout.CENTER);
-        mainPanel.add (cbSmooth, BorderLayout.SOUTH);
+        JPanel jp1 = new JPanel();
+        jp1.add (cbSmooth);
+        jp1.add (cbTick);
+        mainPanel.add (jp1, BorderLayout.SOUTH);
         mainPanel.add (comboBox, BorderLayout.NORTH);
 
         cbSmooth.addActionListener(e -> clock.setSmoothSecPointer(cbSmooth.isSelected()));
+        cbTick.addActionListener(e -> clock.setTick(cbTick.isSelected() ? "tick.wav" : null));
         comboBox.addActionListener(e -> clock.newImageSet((ImageSet) Objects.requireNonNull(comboBox.getSelectedItem())));
     }
 
