@@ -7,28 +7,29 @@ import java.util.concurrent.CountDownLatch;
 
 public class WavePlayer
 {
-    public static void playFileFromResource(String name)
+    public static void playFileFromResource (String name, boolean wait)
     {
         InputStream i = ImageSet.getResource(name);
-        playWave(i);
+        playWave (i, wait);
     }
 
-    public static void playWave (InputStream is)
+    public static void playWave (InputStream is, boolean wait)
     {
-        //CountDownLatch syncLatch = new CountDownLatch(1);
+        CountDownLatch syncLatch = new CountDownLatch(1);
         try
         {
             Clip clip = AudioSystem.getClip();
-//            clip.addLineListener(e ->
-//            {
-//                if (e.getType() == LineEvent.Type.STOP)
-//                {
-//                    syncLatch.countDown();
-//                }
-//            });
+            clip.addLineListener(e ->
+            {
+                if (e.getType() == LineEvent.Type.STOP)
+                {
+                    syncLatch.countDown();
+                }
+            });
             clip.open (AudioSystem.getAudioInputStream(is));
             clip.start();
-           // syncLatch.await();
+            if (wait)
+                syncLatch.await();
         }
         catch (Exception exc)
         {

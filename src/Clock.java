@@ -14,9 +14,12 @@ class Clock extends JPanel {
     private BufferedImage offimg;
     private Graphics2D offgraph;
     private ImageSet imageSet;
+    private int al_min;
+    private int al_hour;
 
     public Clock (ImageSet imgSet) {
         newImageSet (imgSet);
+        this.clearAlarmTime();
         // Tick the clock
         ScheduledExecutorService sched = Executors.newScheduledThreadPool(1);
         sched.scheduleAtFixedRate(this::Tick, 0, 100, TimeUnit.MILLISECONDS);
@@ -30,6 +33,20 @@ class Clock extends JPanel {
         offgraph = offimg.createGraphics();
     }
 
+    public void setAlarmTime (int hour, int min)
+    {
+        System.out.println("altime "+hour+"-"+min);
+        al_min = min;
+        al_hour = hour;
+    }
+
+    public void clearAlarmTime ()
+    {
+        al_min = -1;
+        al_hour = -1;
+    }
+
+
     public void setSmoothSecPointer(boolean sm) {
         smooth = sm;
     }
@@ -42,24 +59,26 @@ class Clock extends JPanel {
             float mill = cal.get(Calendar.MILLISECOND) / 1000f;
             sec += mill;
         }
-        if (tick != null) {
+        if (tick != null && !smooth) {
             counter++;
             if (counter == 10) {
                 counter = 0;
-                WavePlayer.playFileFromResource(tick);
+                WavePlayer.playFileFromResource(tick, false);
             }
         }
         int min = cal.get(Calendar.MINUTE);
         int hr = cal.get(Calendar.HOUR); // 0 ... 23
         int temp = hr * 60 + min;
 
+        if (min == al_min && cal.get(Calendar.HOUR_OF_DAY)%24 == al_hour) {
+            this.clearAlarmTime();
+            WavePlayer.playFileFromResource("alarm.wav", false);
+            System.out.println("RING");
+        }
+
         // Face
         offgraph.clearRect(0,0, offimg.getWidth(), offimg.getHeight());
         offgraph.drawImage (imageSet.clockFace, 0, 0, null);
-
-//        float alpha = 1.0f; //draw half transparent
-//        AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.CLEAR,alpha);
-//        offgraph.setComposite(ac);
 
         // Sec
         if (imageSet.imgSecond != null) {

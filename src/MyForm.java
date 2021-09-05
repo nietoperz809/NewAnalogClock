@@ -1,10 +1,14 @@
+import com.raven.swing.TimePicker;
+
 import javax.swing.*;
 import java.awt.*;
-import java.io.BufferedInputStream;
 import java.util.Objects;
 
 public class MyForm {
     private final JPanel mainPanel = new JPanel();
+    private final TimePicker tp = new com.raven.swing.TimePicker();
+    private final Clock clock;
+    JButton btAlarm = new JButton("Al off");
 
     public MyForm() throws Exception{
         DefaultComboBoxModel<ImageSet> combMod = new DefaultComboBoxModel<>();
@@ -39,26 +43,50 @@ public class MyForm {
 
         comboBox.setModel (combMod);
 
-        Clock clock = new Clock (combMod.getElementAt(0));
+        clock = new Clock (combMod.getElementAt(0));
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add (clock, BorderLayout.CENTER);
         JPanel jp1 = new JPanel();
         jp1.add (cbSmooth);
         jp1.add (cbTick);
+        jp1.add (btAlarm);
         mainPanel.add (jp1, BorderLayout.SOUTH);
         mainPanel.add (comboBox, BorderLayout.NORTH);
 
         cbSmooth.addActionListener(e -> clock.setSmoothSecPointer(cbSmooth.isSelected()));
         cbTick.addActionListener(e -> clock.setTick(cbTick.isSelected() ? "tick.wav" : null));
         comboBox.addActionListener(e -> clock.newImageSet((ImageSet) Objects.requireNonNull(comboBox.getSelectedItem())));
+        btAlarm.addActionListener(e -> startTP());
+        tp.addActionListener(e -> {
+            btAlarm.setText ("AL ON!");
+            String[] sp1 = tp.getSelectedTime().split(" ");
+            String[] sp2 = sp1[0].split(":");
+            int hour = Integer.parseInt(sp2[0]);
+            int min = Integer.parseInt(sp2[1]);
+            if (sp1[1].equals("PM"))
+                hour = (hour + 12)%24;
+            clock.setAlarmTime(hour,min);
+            //System.out.println(""+hour+"-"+min);
+        });
+    }
+
+    private void startTP()
+    {
+        btAlarm.setText("AL off");
+        clock.clearAlarmTime();
+        tp.setForeground(new Color(138, 48, 191));
+        tp.setSelectedTime (new java.util.Date());
+        tp.showPopup(mainPanel, (mainPanel.getWidth() - tp.getPreferredSize().width) / 2,
+                (mainPanel.getHeight() - tp.getPreferredSize().height) / 2);
     }
 
     public static void main(String[] args) throws Exception {
         JFrame frame = new JFrame("Analog Watch");
+        frame.setSize(500, 550);
         MyForm mf = new MyForm();
         frame.setContentPane(mf.mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 }
