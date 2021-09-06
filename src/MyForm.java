@@ -44,6 +44,10 @@ public class MyForm {
                 "blue_minute.png", "blue_sec.png"));
         combMod.addElement (new ImageSet ("CSS", "css_dial.png", "css_hour.png",
                 "css_minute.png", "css_sec.png"));
+        combMod.addElement (new ImageSet ("Goog", "clockgoog1_dial.png", "clockgoog1_hour.png",
+                "clockgoog1_minute.png", "clockgoog1_sec.png"));
+        combMod.addElement (new ImageSet ("GDE", "gdedial.png", "gdehour.png",
+                "gdeminute.png", "gdesec.png"));
 
         comboBox.setModel (combMod);
 
