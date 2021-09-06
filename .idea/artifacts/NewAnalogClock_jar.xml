@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="NewAnalogClock:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/NewAnalogClock_jar</output-path>
+    <root id="archive" name="NewAnalogClock.jar">
+      <element id="module-output" name="NewAnalogClock" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/swing-time-picker.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/TimingFramework-0.55.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
