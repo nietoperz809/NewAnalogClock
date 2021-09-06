@@ -52,6 +52,8 @@ public class MyForm {
                 "my_clock_minute.png", "my_clock_sec.png"));
         combMod.addElement (new ImageSet ("Clean", "clean_dial.png", "clean_hour.png",
                 "clean_minute.png", "clean_sec.png"));
+        combMod.addElement (new ImageSet ("Winter", "winter_clock_dial.png", "winter_clock_hour.png",
+                "winter_clock_minute.png", "winter_clock_sec.png"));
 
         comboBox.setModel (combMod);
 
