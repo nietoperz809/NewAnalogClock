@@ -8,7 +8,7 @@ public class MyForm {
     private final JPanel mainPanel = new JPanel();
     private final TimePicker tp = new com.raven.swing.TimePicker();
     private final Clock clock;
-    JButton btAlarm = new JButton("Al off");
+    private final JButton btAlarm = new JButton("Al off");
 
     public MyForm() throws Exception{
         DefaultComboBoxModel<ImageSet> combMod = new DefaultComboBoxModel<>();
@@ -16,45 +16,7 @@ public class MyForm {
         JCheckBox cbTick = new JCheckBox("Tick Sound");
         JComboBox<ImageSet> comboBox = new JComboBox<>();
 
-        combMod.addElement (new ImageSet ("Dial", "ics_clock_dial2.png", "ics_clock_hour.png",
-                "ics_clock_minute.png", "ics_clock_second.png"));
-        combMod.addElement (new ImageSet ("Default", "ics_clock_dial.png", "ics_clock_hour.png",
-                "ics_clock_minute.png", "ics_clock_second.png"));
-        combMod.addElement (new ImageSet ("G1", "g1_dial.png", "g1_hour.png",
-                "g1_minute.png", "g1_second.png"));
-        combMod.addElement (new ImageSet ("Bell", "bell_dial.png", "bell_hour.png",
-                "bell_minute.png", "bell_second.png"));
-        combMod.addElement (new ImageSet ("Day", "day_dial.png", "day_hour.png",
-                "day_minute.png", "day_second.png"));
-        combMod.addElement (new ImageSet ("Bg", "bg_clock_bg.png", "ic_hour.png",
-                "ic_minute.png", "ic_miao.png"));
-        combMod.addElement (new ImageSet ("Honey", "honeycomb_clock_dial.png", "honeycomb_clock_hour.png",
-                "honeycomb_clock_minute.png", "honeycomb_clock_sec.png"));
-        combMod.addElement (new ImageSet ("Manila", "manila_dial.png", "manila_hour.png",
-                "manila_minute.png", "manila_sec.png"));
-        combMod.addElement (new ImageSet ("Toon", "toon_dial.png", "toon_hour.png",
-                "toon_minute.png", "toon_sec.png"));
-        combMod.addElement (new ImageSet ("Roman", "roman1_bg.png", "roman1_hour_hand.png",
-                "roman1_minute_hand.png", "roman1_sec_hand.png"));
-        combMod.addElement (new ImageSet ("Stock1", "stockg1_dial.png", "stockg1_hour.png",
-                "stockg1_minute.png", "stockg1_sec.png"));
-        combMod.addElement (new ImageSet ("Red", "red1_bg.png", "red1_hour_hand.png",
-                "red1_minute_hand.png", "red1_sec_hand.png"));
-        combMod.addElement (new ImageSet ("Blue", "blue_dial.png", "blue_hour.png",
-                "blue_minute.png", "blue_sec.png"));
-        combMod.addElement (new ImageSet ("CSS", "css_dial.png", "css_hour.png",
-                "css_minute.png", "css_sec.png"));
-        combMod.addElement (new ImageSet ("Goog", "clockgoog1_dial.png", "clockgoog1_hour.png",
-                "clockgoog1_minute.png", "clockgoog1_sec.png"));
-        combMod.addElement (new ImageSet ("GDE", "gdedial.png", "gdehour.png",
-                "gdeminute.png", "gdesec.png"));
-        combMod.addElement (new ImageSet ("MY", "my3_dial.png", "my_clock_hour.png",
-                "my_clock_minute.png", "my_clock_sec.png"));
-        combMod.addElement (new ImageSet ("Clean", "clean_dial.png", "clean_hour.png",
-                "clean_minute.png", "clean_sec.png"));
-        combMod.addElement (new ImageSet ("Winter", "winter_clock_dial.png", "winter_clock_hour.png",
-                "winter_clock_minute.png", "winter_clock_sec.png"));
-
+        fillCB (combMod);
         comboBox.setModel (combMod);
 
         clock = new Clock (combMod.getElementAt(0));
@@ -80,8 +42,55 @@ public class MyForm {
             if (sp1[1].equals("PM"))
                 hour = (hour + 12)%24;
             clock.setAlarmTime(hour,min);
-            //System.out.println(""+hour+"-"+min);
         });
+    }
+
+    private void fillCB (DefaultComboBoxModel<ImageSet> cbm) throws Exception {
+        String[][] sets = {
+                {"Dial", "ics_clock_dial2.png", "ics_clock_hour.png",
+                        "ics_clock_minute.png", "ics_clock_second.png"},
+                {"Default", "ics_clock_dial.png", "ics_clock_hour.png",
+                        "ics_clock_minute.png", "ics_clock_second.png"},
+                {"G1", "g1_dial.png", "g1_hour.png",
+                        "g1_minute.png", "g1_second.png"},
+                {"Bell", "bell_dial.png", "bell_hour.png",
+                        "bell_minute.png", "bell_second.png"},
+                {"Day", "day_dial.png", "day_hour.png",
+                        "day_minute.png", "day_second.png"},
+                {"Bg", "bg_clock_bg.png", "ic_hour.png",
+                        "ic_minute.png", "ic_miao.png"},
+                {"Honey", "honeycomb_clock_dial.png", "honeycomb_clock_hour.png",
+                        "honeycomb_clock_minute.png", "honeycomb_clock_sec.png"},
+                {"Manila", "manila_dial.png", "manila_hour.png",
+                        "manila_minute.png", "manila_sec.png"},
+                {"Toon", "toon_dial.png", "toon_hour.png",
+                        "toon_minute.png", "toon_sec.png"},
+                {"Roman", "roman1_bg.png", "roman1_hour_hand.png",
+                        "roman1_minute_hand.png", "roman1_sec_hand.png"},
+                {"Stock1", "stockg1_dial.png", "stockg1_hour.png",
+                        "stockg1_minute.png", "stockg1_sec.png"},
+                {"Red", "red1_bg.png", "red1_hour_hand.png",
+                        "red1_minute_hand.png", "red1_sec_hand.png"},
+                {"Blue", "blue_dial.png", "blue_hour.png",
+                        "blue_minute.png", "blue_sec.png"},
+                {"CSS", "css_dial.png", "css_hour.png",
+                        "css_minute.png", "css_sec.png"},
+                {"Goog", "clockgoog1_dial.png", "clockgoog1_hour.png",
+                        "clockgoog1_minute.png", "clockgoog1_sec.png"},
+                {"GDE", "gdedial.png", "gdehour.png",
+                        "gdeminute.png", "gdesec.png"},
+                {"MY", "my3_dial.png", "my_clock_hour.png",
+                        "my_clock_minute.png", "my_clock_sec.png"},
+                {"Clean", "clean_dial.png", "clean_hour.png",
+                        "clean_minute.png", "clean_sec.png"},
+                {"Winter", "winter_clock_dial.png", "winter_clock_hour.png",
+                        "winter_clock_minute.png", "winter_clock_sec.png"},
+                {"Droid2", "clockdroid2_dial.png", "clockdroid2_hour.png",
+                        "clockdroid2_minute.png", "clockdroid2_sec.png"}};
+
+        for (String[] s : sets) {
+            cbm.addElement(new ImageSet(s));
+        }
     }
 
     private void startTP()

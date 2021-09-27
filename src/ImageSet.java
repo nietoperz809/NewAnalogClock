@@ -16,6 +16,10 @@ public class ImageSet {
         imgSecond = ImageIO.read (Objects.requireNonNull (getResource (second)));
     }
 
+    public ImageSet (String[] arr) throws Exception {
+        this (arr[0], arr[1], arr[2], arr[3], arr[4]);
+    }
+
     public ImageSet (String name, String face, String hour, String minute) throws Exception {
         this.name = name;
         clockFace = ImageIO.read (Objects.requireNonNull (getResource (face)));
